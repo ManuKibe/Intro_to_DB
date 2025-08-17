@@ -12,3 +12,5 @@ INSERT INTO customers (customer_id, customer_name, email, address) VALUES
     (4, 'Nehemial Kamolu', 'nkamolu@sandtech.com', [126 Happiness Ave.']);
 124 Happiness Ave.
 ["124 Happiness  Ave."]
+["125 Happiness  Ave."]
+["126 Happiness  Ave."]
