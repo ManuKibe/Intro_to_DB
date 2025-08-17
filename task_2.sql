@@ -1,50 +1,48 @@
 -- task_2.sql
--- Create tables for alx_book_store
+-- Create database if not exists
+CREATE DATABASE IF NOT EXISTS alx_book_store;
 
--- Switch to the database
+-- Use the database
 USE alx_book_store;
 
--- Create AUTHORS table
-CREATE TABLE IF NOT EXISTS AUTHORS (
+-- Create Authors table
+CREATE TABLE IF NOT EXISTS Authors (
     author_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    country VARCHAR(100)
+    author_name VARCHAR(255) NOT NULL
 );
 
--- Create BOOKS table
-CREATE TABLE IF NOT EXISTS BOOKS (
+-- Create Books table
+CREATE TABLE IF NOT EXISTS Books (
     book_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    author_id INT NOT NULL,
+    author_id INT,
     price DECIMAL(10,2) NOT NULL,
-    stock INT DEFAULT 0,
-    FOREIGN KEY (author_id) REFERENCES AUTHORS(author_id)
+    published_year INT,
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
 );
 
--- Create CUSTOMERS table
-CREATE TABLE IF NOT EXISTS CUSTOMERS (
+-- Create Customers table
+CREATE TABLE IF NOT EXISTS Customers (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    address VARCHAR(255),
+    customer_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE,
     phone VARCHAR(20)
 );
 
--- Create ORDERS table
-CREATE TABLE IF NOT EXISTS ORDERS (
+-- Create Orders table
+CREATE TABLE IF NOT EXISTS Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT NOT NULL,
+    customer_id INT,
     order_date DATE NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(customer_id)
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
--- Create ORDER_DETAILS table
-CREATE TABLE IF NOT EXISTS ORDER_DETAILS (
+-- Create Order_Details table
+CREATE TABLE IF NOT EXISTS Order_Details (
     order_detail_id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    book_id INT NOT NULL,
+    order_id INT,
+    book_id INT,
     quantity INT NOT NULL,
-    price DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id),
-    FOREIGN KEY (book_id) REFERENCES BOOKS(book_id)
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
